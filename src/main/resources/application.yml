@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sistema-bancario-cobol
+  r2dbc:
+    # Base H2 en archivo: los datos sobreviven a reinicios (./data/banco.mv.db)
+    url: r2dbc:h2:file:///./data/banco;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always   # ejecuta schema.sql (CREATE TABLE IF NOT EXISTS)
+
+banco:
+  cobol:
+    # Carpeta donde está banco.dll (relativa al directorio de ejecución)
+    directorio: cobol
+    nombre-libreria: banco
+    # Carpeta bin de GnuCOBOL (libcob-4.dll). También debe estar en el PATH.
+    gnucobol-bin: ${GNUCOBOL_BIN:C:/Users/ASUS/AppData/Local/GnuCOBOL/bin}
+  timeout:
+    # Tiempo máximo de una llamada nativa a la DLL COBOL
+    cobol: 3s
+    # Tiempo máximo de la operación completa (COBOL + base de datos)
+    operacion: 5s
+  simulacion:
+    # Si está activo, el header X-Demora-Ms retrasa la llamada COBOL
+    # (sirve para que el front pruebe su manejo de timeouts)
+    habilitada: true
+    demora-maxima: 30s
+  cors:
+    origenes-permitidos: "*"

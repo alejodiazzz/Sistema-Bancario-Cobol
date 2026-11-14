@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///bancotest;DB_CLOSE_DELAY=-1
+banco:
+  timeout:
+    cobol: 1s
+    operacion: 2s
