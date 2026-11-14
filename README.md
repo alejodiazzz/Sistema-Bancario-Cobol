@@ -61,7 +61,7 @@ java -jar target\sistema-bancario-cobol-1.0.0.jar
 
 Si GnuCOBOL está en otra ruta: `$env:GNUCOBOL_BIN="C:\ruta\GnuCOBOL\bin"`.
 
-## Contrato del API (para Persona B)
+## Contrato del API 
 
 Base: `http://localhost:8080`. Montos en pesos con máximo 2 decimales. JSON en todas las respuestas.
 
