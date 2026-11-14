@@ -5,7 +5,7 @@ Transacciones bancarias con persistencia. Las reglas de negocio están en **COBO
 - Documentación del API en vivo: `http://localhost:8080/swagger-ui.html`
 - Detalle técnico: [ARQUITECTURA.md](ARQUITECTURA.md)
 
-## Reparto del Entregable A (2 personas)
+## Reparto del Entregable A
 
 | | Persona A — Backend / COBOL | Persona B — Frontend |
 |---|---|---|
