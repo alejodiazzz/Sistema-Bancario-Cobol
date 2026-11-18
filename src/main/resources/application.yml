@@ -15,10 +15,10 @@ spring:
 
 banco:
   cobol:
-    # Carpeta donde está banco.dll (relativa al directorio de ejecución)
+    # Carpeta donde está la librería COBOL (banco.dll / libbanco.so / libbanco.dylib)
     directorio: cobol
     nombre-libreria: banco
-    # Carpeta bin de GnuCOBOL (libcob-4.dll). También debe estar en el PATH.
+    # Carpeta bin de GnuCOBOL en Windows (libcob-4.dll). En Linux/macOS se resuelve libcob del sistema.
     gnucobol-bin: ${GNUCOBOL_BIN:C:/Users/ASUS/AppData/Local/GnuCOBOL/bin}
   timeout:
     # Tiempo máximo de una llamada nativa a la DLL COBOL

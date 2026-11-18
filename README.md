@@ -46,7 +46,9 @@ HTTP ─► WebFlux (Netty) ─► BancoService ──► CobolGateway ──JNA
 
 ## Requisitos y ejecución
 
-- Windows x64, JDK 17, Maven, GnuCOBOL (con su carpeta `bin` en el `PATH`).
+- Windows x64 o Linux/macOS x64, JDK 17+, Maven, GnuCOBOL (`cobc` y `libcob`).
+
+### En Windows (PowerShell)
 
 ```powershell
 # 1. Compilar COBOL a DLL (solo si cambió banco.cbl)
@@ -60,6 +62,19 @@ java -jar target\sistema-bancario-cobol-1.0.0.jar
 ```
 
 Si GnuCOBOL está en otra ruta: `$env:GNUCOBOL_BIN="C:\ruta\GnuCOBOL\bin"`.
+
+### En Linux / macOS (Bash)
+
+```bash
+# 1. Compilar COBOL a librería compartida (.so en Linux / .dylib en macOS)
+cobc -m -o cobol/libbanco.so cobol/banco.cbl
+
+# 2. Pruebas (usan la librería nativa real) y empaquetado
+mvn clean package
+
+# 3. Ejecutar (desde la raíz del proyecto)
+java -jar target/sistema-bancario-cobol-1.0.0.jar
+```
 
 ## Contrato del API 
 
