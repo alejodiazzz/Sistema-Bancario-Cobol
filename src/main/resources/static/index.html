@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISBANCO-COBOL · Terminal Mainframe 3270</title>
+    <link rel="stylesheet" href="css/terminal.css">
+</head>
+<body>
+    <a class="salto-contenido" href="#vista">Saltar al contenido principal</a>
+
+    <div class="terminal-marco">
+        <header class="barra-sistema">
+            <div class="sistema-titulo">
+                <span class="sistema-marca">SISBANCO-COBOL</span>
+                <span class="sistema-sep" aria-hidden="true">──</span>
+                <span class="sistema-sub">CICS TRANSACTION SERVER</span>
+                <span class="sistema-sep ocultar-movil" aria-hidden="true">──</span>
+                <span class="sistema-term ocultar-movil">TERM 3270</span>
+            </div>
+            <div class="sistema-derecha">
+                <div id="badge-sim" class="badge-sim" hidden></div>
+                <time id="reloj" class="sistema-reloj" aria-label="Hora del terminal">--</time>
+            </div>
+        </header>
+
+        <nav class="barra-pf" aria-label="Navegación principal (Teclas PF)">
+            <a href="#/cuentas" class="tecla-pf" data-nav="cuentas" title="Alt+1">
+                <span class="pf-num">PF1</span> CUENTAS
+            </a>
+            <a href="#/transferir" class="tecla-pf" data-nav="transferir" title="Alt+2">
+                <span class="pf-num">PF2</span> TRANSFER
+            </a>
+            <a href="#/credito" class="tecla-pf" data-nav="credito" title="Alt+3">
+                <span class="pf-num">PF3</span> CREDITO
+            </a>
+            <button type="button" id="pf-ayuda" class="tecla-pf tecla-pf-der" aria-expanded="false" aria-controls="panel-ayuda" title="Alt+4">
+                <span class="pf-num">PF12</span> AYUDA / PRUEBAS
+            </button>
+        </nav>
+
+        <div id="banner-offline" class="banner-offline" hidden></div>
+        <section id="panel-ayuda" class="panel-ayuda" aria-label="Configuración y pruebas de timeout" hidden></section>
+
+        <main id="vista" class="vista" tabindex="-1">
+            <p class="estado-carga">INICIALIZANDO TERMINAL 3270...</p>
+        </main>
+
+        <footer id="barra-estado" class="barra-estado" data-nivel="OK" aria-live="polite">
+            <div class="estado-izq">
+                <span class="estado-prompt" aria-hidden="true">&gt;</span>
+                <span id="estado-texto">RC=0000 READY</span>
+                <span class="cursor" aria-hidden="true">█</span>
+            </div>
+            <div class="estado-der ocultar-movil">
+                COBOL DLL · R2DBC · H2 · ALT+1..4
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

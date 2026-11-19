@@ -1,0 +1,8 @@
+{
+  "name": "sistema-bancario-cobol-front",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:front": "node --test src/test/js/"
+  }
+}

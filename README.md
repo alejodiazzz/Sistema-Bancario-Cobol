@@ -122,3 +122,33 @@ Headers opcionales en operaciones que mueven dinero:
 Leer `GET /api/config` y usar un timeout de cliente **un poco mayor** que `timeoutOperacionMs` (p. ej. +1 s). Así:
 - si el servidor corta primero → llega un `504` con mensaje claro;
 - si corta el cliente (red caída) → reintentar con la **misma** `X-Idempotency-Key`.
+
+## Frontend
+
+Interfaz web estilo **terminal mainframe IBM 3270** construida en HTML, CSS y JavaScript puro con módulos ES6 nativos (sin bundler ni dependencias), ubicada en `src/main/resources/static/`. Spring Boot la sirve directamente en **`http://localhost:8080/`**.
+
+### Pantallas y atajos
+
+| Atajo | Ruta | Funcionalidad |
+|---|---|---|
+| `PF1` / `Alt+1` | `#/cuentas` | Listado de cuentas y formulario de apertura |
+| — | `#/cuenta/{n}` | Saldo, extracto de movimientos y pestañas de **depósito**, **retiro**, **interés** y **comisión** |
+| `PF2` / `Alt+2` | `#/transferir` | Transferencia atómica con verificación previa y comprobante de ambos saldos |
+| `PF3` / `Alt+3` | `#/credito` | Simulador de crédito de cuota fija (sistema francés, acepta tasa `0 %`) |
+| `PF12` / `Alt+4` | Panel superior | Configuración leída de `/api/config`, leyenda de códigos `RC`, y **modo pruebas de timeouts** |
+
+### Manejo de timeouts e idempotencia
+
+- Al iniciar consulta `GET /api/config` y calibra el timeout del cliente a `timeoutOperacionMs + 1000 ms` (si el servidor no responde, muestra un banner offline y usa `6000 ms` por defecto).
+- Cada petición usa `AbortController`: muestra un contador en vivo con barra de progreso y permite cancelar con **`PF3 CANCELAR`** o **`Esc`**.
+- Las 5 operaciones que mueven dinero generan un UUID en `X-Idempotency-Key` y **reutilizan la misma clave al pulsar `REINTENTAR`**. Si el backend devuelve `"repetida": true`, se muestra un aviso indicando que la operación no se duplicó.
+- En **`PF12 AYUDA / PRUEBAS`** (cuando `banco.simulacion.habilitada=true`) se puede configurar `X-Demora-Ms` y un timeout de cliente temporal para probar cancelación, `504 TIMEOUT_COBOL` y `TIMEOUT_CLIENTE` con reintento idempotente.
+
+### Pruebas del frontend
+
+Requiere Node.js 18+ (usa el runner nativo `node --test`, sin `npm install`):
+
+```bash
+npm run test:front
+```
+
